@@ -1,15 +1,16 @@
 const { connect } = require('../models/Repository')
-const filmesModel = require('../models/ListafilmesSchema')
+const {filmesModel} = require('../models/ListafilmesSchema')
 const { ingressosModel } = require('../models/ListaingressosSchema')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const SEGREDO = process.env.SEGREDO
+
 connect()
 
 
 const getAll = (request, response) => {
+
   filmesModel.find((error, filmes) => {
-      console.log(filmesModel);
     if (error) {
       return response.status(500).send(error)
     }
@@ -214,7 +215,7 @@ const getAll = (request, response) => {
 // }
 
 module.exports = {
-  getAll,
+  getAll
 //   getById,
 //   add,
 //   addAdmin,

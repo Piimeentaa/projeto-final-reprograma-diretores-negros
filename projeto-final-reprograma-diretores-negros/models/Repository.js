@@ -1,6 +1,6 @@
 // require('dotenv-safe').load()
 const mongoose = require('mongoose');
-const MONGO_URL = 'mongodb://localhost:27017/apifilmes'
+const MONGO_URL = 'mongodb://localhost:27017/filmesapi'
 
 function connect () {
   mongoose.connect(MONGO_URL,
