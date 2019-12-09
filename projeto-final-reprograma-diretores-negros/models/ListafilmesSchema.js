@@ -7,6 +7,8 @@ const FilmesSchema = new Schema({
   cartaz: { type: String},
   descricao: { type: String },
   dataExibicao: { type: String, required: true},
+  horarioSessao: [{type: String, require: true}, {type: String, require: true}, 
+    {type: String, require: true}, {type: String, require: true}]
    //colocar o schema dos ingressos?
 
 })

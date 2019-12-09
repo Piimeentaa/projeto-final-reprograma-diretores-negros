@@ -18,6 +18,70 @@ const getAll = (request, response) => {
     return response.status(200).send(filmes)
   })
 }
+const getById = (request, response) => {
+    const id = request.params.id
+  
+    return filmesModel.findById(id, (error, filmes) => {
+      if (error) {
+        return response.status(500).send(error)
+      }
+  
+      if (filmes) {
+        return response.status(200).send(filmes)
+      }
+  
+      return response.status(404).send('Id fe filme não encontrado.')
+    })
+  }
+const add = (request, response) => {
+  const novoFilme = new filmesModel(request.body)
+
+  novoFilme.save((error) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    return response.status(201).send(novoFilme)
+  })
+}
+const update = (request, response) => {
+    const id = request.params.id
+    const filmesUpdate = request.body
+    const options = { new: true }
+  
+    filmesModel.findByIdAndUpdate(
+      id,
+      filmesUpdate,
+      options,
+      (error, filmes) => {
+        if (error) {
+          return response.status(500).sned(error)
+        }
+  
+        if (filmes) {
+          return response.status(200).send(filmes)
+        }
+  
+        return response.status(404).send('Filme não encontrado.')
+      }
+    )
+  }
+  const remove = (request, response) => {
+      const id = request.params.id
+    
+      filmesModel.findByIdAndDelete(id, (error, filmes) => {
+        if (error) {
+          return response.status(500).send(error)
+        }
+    
+        if (filmes) {
+          return response.status(200).send(id)
+        }
+    
+        return response.status(404).send('Filmes não encontrado nenhuma remoção feita.')
+      })
+    }
+  
 
 // const getById = (request, response) => {
 //   const id = request.params.id
@@ -215,7 +279,11 @@ const getAll = (request, response) => {
 // }
 
 module.exports = {
-  getAll
+  getAll,
+  getById,
+  add,
+  update,
+  remove
 //   getById,
 //   add,
 //   addAdmin,

@@ -5,9 +5,6 @@ const controller = require("../controllers/ListafilmesController")
 const jwt = require('jsonwebtoken')
 const SEGREDO = process.env.SEGREDO
 
-
-router.get('',  controller.getAll)
-
 // const autenticar = (request, response, next) => {
 //   const authHeader = request.get('authorization')
 //   let autenticado = false
@@ -65,6 +62,12 @@ router.get('',  controller.getAll)
 
 //   next()
 // }
+
+router.get('',  controller.getAll)
+router.post('/criar', controller.add)
+router.get('/:id', controller.getById)
+router.patch('/:id', controller.update)
+router.delete('/:id', controller.remove)
 
 
 // router.post('', controller.add)
