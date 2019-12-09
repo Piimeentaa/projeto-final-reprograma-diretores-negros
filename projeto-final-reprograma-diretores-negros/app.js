@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use('/ingresso', ingressos)
+app.use('/ingressos', ingressos)
 app.use('/filmes', filmes)
 
 app.get('/', (request, response) => {

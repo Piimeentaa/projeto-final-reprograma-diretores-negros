@@ -81,6 +81,22 @@ const update = (request, response) => {
         return response.status(404).send('Filmes não encontrado nenhuma remoção feita.')
       })
     }
+    const addIngresso = async (request, response) => {
+      const filmeId = request.params.filmeId
+      const ingresso = request.body
+      const options = { new: true }
+      const novoIngresso = new ingressosModel(ingresso)
+      const filmes = await filmesModel.findById(filmeId)
+    
+      filmes.ingressos.push(novoIngresso)
+      filmes.save((error) => {
+        if (error) {
+          return response.status(500).send(error)
+        }
+    
+        return response.status(201).send(filmes)
+      })
+    }
   
 
 // const getById = (request, response) => {

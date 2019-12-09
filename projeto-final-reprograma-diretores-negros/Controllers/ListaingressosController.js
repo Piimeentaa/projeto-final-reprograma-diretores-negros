@@ -5,14 +5,48 @@ connect()
 
 
 const getAll = (request, response) => {
-  ingressosModel.find((error, pokemons) => {
+  ingressosModel.find((error, ingressos) => {
     if (error) {
       return response.status(500).send(error)
     }
 
-    return response.status(200).send(pokemons)
+    return response.status(200).send(ingressos)
   })
 }
+const addCadastro = (request, response) => {
+  //testar a criação de um novo cadastro igual criar um treinador
+  // if (!request.body.senha) {
+  //   return response.status(400).send('bota a senha aí')
+  // }
+  // const senhaCriptografada = bcrypt.hashSync(request.body.senha)
+  // request.body.senha = senhaCriptografada
+  const novoCadastro = new ingressosModel(request.body)
+
+  novoCadastro.save((error) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
+
+    return response.status(201).send(novoCadastro)
+  })
+}
+const addIngresso = async (request, response) => {
+  //testar vincular um filme a um cadastro igual vincular um pokemon ao treinador
+    const filmeId = request.params.filmeId
+    const ingresso = request.body
+    const options = { new: true }
+    const novoIngresso = new ingressosModel(ingresso)
+    const filmes = await filmesModel.findById(filmeId)
+  
+    filmes.ingressos.push(novoIngresso)
+    filmes.save((error) => {
+      if (error) {
+        return response.status(500).send(error)
+      }
+  
+      return response.status(201).send(filmes)
+    })
+  }
 
 // const getById = (request, response) => {
 //   const id = request.params.id
@@ -107,6 +141,8 @@ const getAll = (request, response) => {
 
 module.exports = {
   getAll,
+  addCadastro,
+  addIngresso
 //   getById,
 //   add,
 //   remove,
