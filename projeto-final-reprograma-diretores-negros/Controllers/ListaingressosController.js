@@ -1,5 +1,6 @@
 const { connect } = require('../models/Repository')
-const { ingressosModel } = require('../models/ListaingressosSchema')
+const  ingressosModel  = require('../models/ListaingressosSchema')
+const {filmesModel} = require('../models/ListafilmesSchema')
 
 connect()
 
@@ -14,12 +15,7 @@ const getAll = (request, response) => {
   })
 }
 const addCadastro = (request, response) => {
-  //testar a criação de um novo cadastro igual criar um treinador
-  // if (!request.body.senha) {
-  //   return response.status(400).send('bota a senha aí')
-  // }
-  // const senhaCriptografada = bcrypt.hashSync(request.body.senha)
-  // request.body.senha = senhaCriptografada
+
   const novoCadastro = new ingressosModel(request.body)
 
   novoCadastro.save((error) => {
