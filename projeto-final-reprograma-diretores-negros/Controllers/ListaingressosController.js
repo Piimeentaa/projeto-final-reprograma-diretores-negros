@@ -28,19 +28,20 @@ const addCadastro = (request, response) => {
 }
 const addIngresso = async (request, response) => {
   //testar vincular um filme a um cadastro igual vincular um pokemon ao treinador
-    const filmeId = request.params.filmeId
-    const ingresso = request.body
+    const cadastroId = request.params.cadastroId
+    const filmebody = request.body
     const options = { new: true }
-    const novoIngresso = new ingressosModel(ingresso)
-    const filmes = await filmesModel.findById(filmeId)
+    const novoIngresso = new filmesModel(filmebody)
+    const cadastro = await ingressosModel.findById(cadastroId)
+
   
-    filmes.ingressos.push(novoIngresso)
-    filmes.save((error) => {
+    cadastro.filmes.push(novoIngresso)
+    cadastro.save((error) => {
       if (error) {
         return response.status(500).send(error)
       }
   
-      return response.status(201).send(filmes)
+      return response.status(201).send(cadastroId)
     })
   }
 
