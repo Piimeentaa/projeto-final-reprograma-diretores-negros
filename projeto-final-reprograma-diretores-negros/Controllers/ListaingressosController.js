@@ -41,25 +41,25 @@ const addIngresso = async (request, response) => {
         return response.status(500).send(error)
       }
   
-      return response.status(201).send(cadastroId)
+      return response.status(201).send("Sua compra foi efetuada com sucesso, bom filme!")
     })
   }
 
-// const getById = (request, response) => {
-//   const id = request.params.id
+const getById = (request, response) => {
+  const id = request.params.id
 
-//   return ingressosModel.findById(id, (error, pokemon) => {
-//     if (error) {
-//       return response.status(500).send(error)
-//     }
+  return ingressosModel.findById(id, (error, ingresso) => {
+    if (error) {
+      return response.status(500).send(error)
+    }
 
-//     if (pokemon) {
-//       return response.status(200).send(pokemon)
-//     }
+    if (ingresso) {
+      return response.status(200).send(ingresso)
+    }
 
-//     return response.status(404).send('Pokémon não encontrado.')
-//   })
-// }
+    return response.status(404).send('Cadastro não encontrado')
+  })
+}
 
 // const add = (request, response) => {
 //   const novoPokemon = new ingressosModel(request.body)
@@ -139,8 +139,8 @@ const addIngresso = async (request, response) => {
 module.exports = {
   getAll,
   addCadastro,
-  addIngresso
-//   getById,
+  addIngresso,
+  getById
 //   add,
 //   remove,
 //   update,
